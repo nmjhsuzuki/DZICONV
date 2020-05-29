@@ -602,7 +602,7 @@ def make_level_images():
 
 # --- 主処理 ---
 
-print('***** DeepZoom形式画像コンバータ *****')
+print('***** Deep Zoom Image File Converter *****')
 if (len(sys.argv) < 3):
     print('Usage: dziconv InputFile(index.csv) OutputPath [tile_size=%d [OverlapSize=%d [JPEGQuality=%d [CacheSize(MB)=%d]]]].' % (tile_size, overlap_size, jpg_quality, cache_size_MB))
     exit()

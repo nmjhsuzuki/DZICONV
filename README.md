@@ -8,9 +8,10 @@
 
 # デモンストレーション (Demonstration)
 
-　Newcastle という名前の Deep Zoom 画像を作成してみます．12枚のスナップ写真を並べたものです．サンプルデータが input/Newcastle フォルダ下に入っています．index.csv は index.xlsxから生成したCSVファイルで，以下の内容になっています．  
-　1行目は，IDに続いて，生成するDZI画像のサイズ（幅，高さ），背景色(R,G,B)を与えます．この例では背景はグレイ(128,128,128)になっていますが，ふつうは黒(0,0,0)でしょう．  
+　Newcastle という名前の Deep Zoom 画像を作成してみます．12枚のスナップ写真を並べたものです．サンプルデータが input\Newcastle フォルダ下に入っています．index.csv は以下の内容になっています．  
+　1行目は，IDに続いて，生成するDZI画像のサイズ（幅，高さ），背景色(R,G,B)を与えます．（この例では（背景色が正しく指定できることを示すため）背景はグレイ(128,128,128)にしてありますが，ふつうは黒(0,0,0)でしょう．）  
 　2行目以降に，入力画像を出力画像に貼り付ける位置(X,Y)と各画像のサイズ(W,H)，画像へのパス（相対パスの場合はindex.csvのあるフォルダからの相対パス）を与えます．ここでは12個の画像を横４列縦３行に並べています．  
+　※Unix/Linux系OSでは，パス区切り文字を / に置換してください．
 
 ```CSV
 Newcastle,21600,10800,128,128,128
@@ -28,7 +29,7 @@ Newcastle,21600,10800,128,128,128
 16308,7272,5184,3456,.\images\IMG_7605.JPG
 ```
 
-たとえば，Windows 10 PC 上で，git clone して DZI 画像を作ってみましょう．（省略しますが Unix/Linux系OS 上でも（パス区切り文字を除いて）コマンドは同じです．）
+たとえば，Windows 10 PC 上で，git clone して DZI 画像を作ってみましょう．（省略しますが Unix/Linux系OS 上でも（パス区切り文字を除いて）コマンドは同じです．ただし index.csv 内のパス区切り文字の変更をお忘れなく．）
 
 ```Batchfile
 D:\>git clone https://github.com/nmjhsuzuki/DZICONV.git
@@ -36,9 +37,9 @@ D:\>git clone https://github.com/nmjhsuzuki/DZICONV.git
 D:\>python dziconv.py .\input\Newcastle\index.csv .\output
 ***** Deep Zoom Format Image Converter *****
 ===== Parameters =====
-Input File Path:D:\DZI-IIIF\DZICONV\input\Newcastle
+Input File Path:D:\DZICONV\input\Newcastle
 Input File Name:index.csv
-Output File Path:D:\DZI-IIIF\DZICONV\output
+Output File Path:D:\DZICONV\output
 tile_size:512
 OverlapSize:1
 JPEGQuality:100
@@ -104,7 +105,7 @@ Level0: 1x1: 1x1
 ============ Finished ============
 ```
 
-　output/Newcastle 以下に DZI 形式画像が出来ています．dzc_output.xml には画像の情報が入っています．
+　output\Newcastle 以下に DZI 形式画像が出来ています．dzc_output.xml には画像の情報が入っています．
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -113,7 +114,7 @@ Level0: 1x1: 1x1
 </Image>
 ```
 
-　dzc_output_files/ フォルダ以下には，階層化されたタイル画像群が格納されています．
+　dzc_output_files\ フォルダ以下には，階層化されたタイル画像群が格納されています．
 
 　[DZI-IIIF](https://github.com/nmjhsuzuki/DZI-IIIF)が導入されていれば，Webブラウザで画像を呼び出して表示できます．やり方は DZI-IIIF の readme.MD をご覧ください．
 
@@ -121,10 +122,9 @@ Level0: 1x1: 1x1
 
 　[IIIF (International Image Interoperability Framework)](https://iiif.io) は，画像へのアクセスを標準化し相互運用性を確保するための国際的なコミュニティ活動です([Wikipedia](https://ja.wikipedia.org/wiki/International_Image_Interoperability_Framework)より)．  
 　[Deep Zoom](https://en.wikipedia.org/wiki/Deep_Zoom) は，Microsoft が開発した，任意の大きさの画像を取り扱える画像技術の一つです．現在では，[Openseadragon](https://openseadragon.github.io) を用いて，PC・タブレット・スマートフォン等の Web ブラウザ上に画像を表示することができます．  
-　私が務める[国立歴史民俗博物館（歴博）](https://www.rekihaku.ac.jp) では，屏風や絵巻などの一辺が数万～数十万画素に及ぶ画像を，どこでも任意の倍率で表示する超大画像ビューワを2000年に開発し，常設展示・企画展示等で来館者の利用に供してきました．2016年ごろから Opensedragon を用いたビューワへ移行し，画像の保持形式として Deep Zoom 形式を用いています．  
-　独自開発ブラウザにおける超高精細画像フォーマット(NMJH形式)が資産として存在し，ここからDZI形式への画像コンバータを C# で開発し使用していました．  
-　今回，[DZI-IIIF](https://github.com/nmjhsuzuki/DZI-IIIF)の公開に合わせて，汎用的に使えるコンバータとして，Python に移植しました．  
-　Python による DZI 画像生成スプリクトは，[openzoom/deepzoom.py](https://github.com/openzoom/deepzoom.py) などすでに存在しますが，本スクリプトは，複数枚の画像を組み合わせて，１辺が数万～数十万画素に達するような超大画像を制作したいときなどに便利です．（よく用いられるPyramid TIFFではひとつのファイルのサイズとして大きくなりすぎると考えられるため．）
+　私が務める[国立歴史民俗博物館（歴博）](https://www.rekihaku.ac.jp) では，屏風や絵巻などの一辺が数万～数十万画素に及ぶ画像を，どこでも任意の倍率で表示する超大画像ビューワを2000年に開発し，常設展示・企画展示等で来館者の利用に供してきました．2016年ごろから Opensedragon を用いたビューワへ移行し，画像の保持形式として Deep Zoom 形式を用いています．独自開発ブラウザにおける超高精細画像フォーマット(NMJH形式)の資料画像が資産として多数存在していますので，ここから Deep Zoom image (DZI) 形式へ変換する画像コンバータを C# で開発し，使用していました．  
+　今回，[DZI-IIIF](https://github.com/nmjhsuzuki/DZI-IIIF)の公開に合わせて，汎用的に使えるコンバータとして，Python に移植しました．これによりOSを超えた可搬性を持たせることができました．  
+　Python による Deep Zoom 画像生成スプリクトは，[openzoom/deepzoom.py](https://github.com/openzoom/deepzoom.py) などすでに存在しますが，本スクリプトは，複数枚の画像を組み合わせて，１辺が数万～数十万画素に達するような超大画像を制作したいときなどに便利です．（よく用いられるPyramid TIFFではひとつのファイルのサイズとして大きくなりすぎると考えられるため．）
 
 # 必要な環境 (Requirement)
 
@@ -142,7 +142,7 @@ Level0: 1x1: 1x1
 
 # インストール(Installation)
 
-　[デモンストレーション](#デモンストレーション-demonstration)をご覧ください．git clone すればすぐ使えます．
+　[デモンストレーション](#デモンストレーション-demonstration)をご覧ください．
 
 # その他 (Note)
 

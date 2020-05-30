@@ -122,7 +122,7 @@ Level0: 1x1: 1x1
 
 　[IIIF (International Image Interoperability Framework)](https://iiif.io) は，画像へのアクセスを標準化し相互運用性を確保するための国際的なコミュニティ活動です([Wikipedia](https://ja.wikipedia.org/wiki/International_Image_Interoperability_Framework)より)．  
 　[Deep Zoom](https://en.wikipedia.org/wiki/Deep_Zoom) は，Microsoft が開発した，任意の大きさの画像を取り扱える画像技術の一つです．現在では，[Openseadragon](https://openseadragon.github.io) を用いて，PC・タブレット・スマートフォン等の Web ブラウザ上に画像を表示することができます．  
-　私が務める[国立歴史民俗博物館（歴博）](https://www.rekihaku.ac.jp) では，屏風や絵巻などの一辺が数万～数十万画素に及ぶ画像を，どこでも任意の倍率で表示する超大画像ビューワを2000年に開発し，常設展示・企画展示等で来館者の利用に供してきました．2016年ごろから Opensedragon を用いたビューワへ移行し，画像の保持形式として Deep Zoom 形式を用いています．独自開発ブラウザにおける超高精細画像フォーマット(NMJH形式)の資料画像が資産として多数存在していますので，ここから Deep Zoom image (DZI) 形式へ変換する画像コンバータを C# で開発し，使用していました．  
+　私が勤める[国立歴史民俗博物館（歴博）](https://www.rekihaku.ac.jp) では，屏風や絵巻などの一辺が数万～数十万画素に及ぶ画像を，どこでも任意の倍率で表示する超大画像ビューワを2000年に開発し，常設展示・企画展示等で来館者の利用に供してきました．2016年ごろから Opensedragon を用いたビューワへ移行し，画像の保持形式として Deep Zoom 形式を用いています．独自開発ブラウザにおける超高精細画像フォーマット(NMJH形式)の資料画像が資産として多数存在していますので，ここから Deep Zoom image (DZI) 形式へ変換する画像コンバータを C# で開発し，使用していました．  
 　今回，[DZI-IIIF](https://github.com/nmjhsuzuki/DZI-IIIF)の公開に合わせて，汎用的に使えるコンバータとして，Python に移植しました．これによりOSを超えた可搬性を持たせることができました．  
 　Python による Deep Zoom 画像生成スプリクトは，[openzoom/deepzoom.py](https://github.com/openzoom/deepzoom.py) などすでに存在しますが，本スクリプトは，複数枚の画像を組み合わせて，１辺が数万～数十万画素に達するような超大画像を制作したいときなどに便利です．（よく用いられるPyramid TIFFではひとつのファイルのサイズとして大きくなりすぎると考えられるため．）
 
@@ -153,6 +153,7 @@ Level0: 1x1: 1x1
 * 鈴木卓治 (SUZUKI, Takuzi)
 * 国立歴史民俗博物館 (National Museum of Japanese History, Chiba, JAPAN)
 * Email: suzuki@rekihaku.ac.jp
+* Twitter: @digirekiten （デジタルで楽しむ歴史資料 https://twitter.com/digirekiten ）
 
 # ライセンス (License)
 

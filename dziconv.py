@@ -5,6 +5,7 @@
 # 入力画像群から Deep Zoom 形式画像ファイル(DZI) を生成する
 # ==========================================================
 # 2020-05-25 Ver.0.1 Initial Version.
+# 2025-07-29 Ver.0.1.1 A Silly Bug Is Fixed (in get_level_l_overlapimage_rect).
 # ==========================================================
 
 # * 20200525 メモ suzuki
@@ -287,7 +288,8 @@ def get_level_l_overlapimage_rect(l, i, j, p, q):
             overlap_l = 0 if (i == 0) else overlap_size
             overlap_u = 0 if (j == 0) else overlap_size
             w = (level_l_w - tile_size * i) if (i == level_l_m) else tile_size
-            h = (level_l_h - tile_size * j) if (i == level_l_n) else tile_size
+            # h = (level_l_h - tile_size * j) if (i == level_l_n) else tile_size
+            h = (level_l_h - tile_size * j) if (j == level_l_n) else tile_size
             if (p == -1):
                 rect_x = overlap_l
                 rect_w = overlap_size

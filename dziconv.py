@@ -496,7 +496,7 @@ class image_buf_record:
     def write_to_file(self, l, out_dir):
         if (not self.is_unused()):
             dr = get_level_l_tileimage_rect(l, self.i, self.j, 0, 0, True)
-            self.img.crop(dr.area()).save(os.path.join(out_dir, ('%d_%d.jpg' % (self.i, self.j))))
+            self.img.crop(dr.area()).save(os.path.join(out_dir, ('%d_%d.jpg' % (self.i, self.j))),quality=jpg_quality)
             self.reset()
         #fi
     #fed
